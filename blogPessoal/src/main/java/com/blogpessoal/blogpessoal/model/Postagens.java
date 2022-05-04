@@ -1,17 +1,17 @@
 package com.blogpessoal.blogpessoal.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "tb_postagens")
@@ -22,15 +22,16 @@ public class Postagens {
 	private long id;
 	
 	@NotBlank
-	@Size(min = 3, max = 1000)
+	@Size(min = 3, max = 500)
 	private String titulo;
 	
 	@NotBlank
-	@Size(min = 3, max = 1000)
+	@Size(min = 3, max = 500)
 	private String texto; 
 	
-	@UpdateTimestamp
-	private LocalDateTime data;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	
 	private String foto;
@@ -66,12 +67,14 @@ public class Postagens {
 	}
 
 
-	public LocalDateTime getData() {
+	
+
+	public Date getData() {
 		return data;
 	}
 
 
-	public void setData(LocalDateTime data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
